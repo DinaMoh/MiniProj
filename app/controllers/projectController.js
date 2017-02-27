@@ -8,16 +8,21 @@ let projectController = {
         Project.find(function(err, projects){
 
             if(err)
+            {
                 res.send(err.message);
+            }
             else
-                // res.render('index', {projects});
-                res.render('index');
-                // console.log('kdkdk');
+            {
+              res.render('indexx', {projects});
+              // res.json(projects);
+              console.log('kdkdk');
+            }
         })
     },
 
     //Create Porject
     createProject:function(req, res){
+        req.body.uid = req.session.uid;
         let project = new Project(req.body);
 
         project.save(function(err, project){
@@ -26,11 +31,10 @@ let projectController = {
                 console.log(err);
             }
             else{
-
                 console.log(project);
                 res.redirect('/');
             }
-        })
+        });
     },
 
     //Get single project
@@ -48,6 +52,27 @@ let projectController = {
       });
     },
 
+    getUserProjects:function(req, res, next){
+
+      var uid = req.session.uid;
+      if(!(uid))
+      {
+        res.send("Can't login");
+      }
+      else {
+        Project.find(uid, function(err, projects){
+          if(err){
+            res.send(err.message);
+          }
+          else {
+            res.json(projects);
+          }
+        });
+      }
+      // console.log("gUP : " + uid);
+
+    },
+
     //Delete Project
     deleteProject:function(req, res, next){
       var id = req.params._id;
@@ -57,6 +82,17 @@ let projectController = {
         }
         else {
           res.redirect('/');
+        }
+      });
+    },
+
+    deleteAllProjects:function(req, res, next){
+      Project.remove(function(err, projects){
+        if(err){
+          res.send(err.message);
+        }
+        else {
+          res.redirect('/getUserProjects');
         }
       });
     },

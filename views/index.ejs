@@ -99,23 +99,29 @@
               <a class="navbar-brand" href="/home">PortForYou</a>
           </div>
       </div>
-      <form class="form" method="GET" action="/login">
-        <div class="form-group navbar-login">
-          <input type="text" class="form-control" name="email" placeholder="Email"/>
-          <input type="password" class="form-control" name="password" placeholder="Password"/>
-          <input type="submit" class="btn btn-default" value="Log In"/>
-          <!-- <input type="submit" class="btn btn-default" value="Register" action="/register"/> -->
+      <div class="col-xs-offset-6 col-xs-6 col-md-offset-6 col-md-6 ">
+        <div class="form-container">
+          <form class="form" method="GET" action="/login">
+            <div class="form-group navbar-login">
+              <input type="text" class="form-control" name="email" id="InputName" placeholder="Email"/>
+              <input type="password" class="form-control" name="password" id="InputPassword" placeholder="Password"/>
+              <input type="submit" class="btn btn-default" value="Log In"/>
+              <!-- <input type="submit" class="btn btn-default" value="Register" action="/register"/> -->
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
   </nav>
-  <div>
-    <form class="form" method="POST" action="/regUser">
-      <input type="text" class="form-control" name="name" placeholder="Name"/>
-      <input type="text" class="form-control" name="username" placeholder="Username"/>
-      <input type="text" class="form-control" name="email" placeholder="Email"/>
-      <input type="text" class="form-control" name="password" placeholder="Password"/>
-      <input type="submit" class="btn btn-default" value="Submit"/>
-    </form>
+  <div class="col-xs-12 col-md-6">
+    <div class="form-container">
+      <form class="form" method="POST" action="/regUser">
+        <input type="text" class="form-control" name="name" placeholder="Name"/>
+        <input type="text" class="form-control" name="username" placeholder="Username"/>
+        <input type="text" class="form-control" name="email" placeholder="Email"/>
+        <input type="text" class="form-control" name="password" placeholder="Password"/>
+        <input type="submit" class="btn btn-default" value="Submit"/>
+      </form>
+    </div>
   </div>
 </body>
 </html>
