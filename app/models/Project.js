@@ -6,6 +6,10 @@ var projectSchema = mongoose.Schema({
         required:true,
         unique:true
     },
+    description:{
+      type:String,
+      required: true
+    },
     URL:{
       type:String,
       required:true

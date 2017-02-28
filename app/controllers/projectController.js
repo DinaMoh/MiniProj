@@ -1,10 +1,15 @@
 let Project = require('../models/Project');
+let User = require('../models/User');
 
 let projectController = {
 
     //Get All Projects
+    // var show = req.params.show;
+    // if(!show)
+    // {
+    //   show = false;
+    // }
     getAllProjects:function(req, res){
-
         Project.find(function(err, projects){
 
             if(err)
@@ -13,9 +18,9 @@ let projectController = {
             }
             else
             {
-              res.render('indexx', {projects});
-              // res.json(projects);
-              console.log('kdkdk');
+              res.render('index', {projects : projects})
+              // res.render('index', {projects});
+              // console.log('kdkdk');
             }
         })
     },
@@ -32,7 +37,7 @@ let projectController = {
             }
             else{
                 console.log(project);
-                res.redirect('/');
+                res.redirect('/getUserProjects');
             }
         });
     },
@@ -60,12 +65,22 @@ let projectController = {
         res.send("Can't login");
       }
       else {
-        Project.find(uid, function(err, projects){
+        Project.find({uid: uid}, function(err, projects){
           if(err){
             res.send(err.message);
           }
           else {
-            res.json(projects);
+            // user.name = "Dina";
+            // var name = Dina;
+            res.render('userproj', {projects : projects, username : req.session.username});
+            // User.find({_id: uid}, function(err, users){
+            //   if(err){
+            //     res.send(err.message);
+            //   }
+            //   else {
+            //     res.render('userproj', {projects}, {users});
+            //   }
+            // });
           }
         });
       }
@@ -92,13 +107,13 @@ let projectController = {
           res.send(err.message);
         }
         else {
-          res.redirect('/getUserProjects');
+          res.redirect('/');
         }
       });
     },
 
     //User projects
-    getProjectsbyUsers:function(req, res, next){
+    getProjectsbyUser:function(req, res, next){
       var userId = req.params._userId;
       Project.find(userId, function(err, projects){
         if(err){
@@ -108,7 +123,19 @@ let projectController = {
           // Not sure yet
           res.json(projects);
         }
-      })
+      });
+    },
+
+    viewSingleProj:function(req, res, next){
+      var pid = req.params.id;
+      Project.findOne({_id : pid}, function(err, project){
+        if(err){
+          res.send(err.message);
+        }
+        else {
+          res.render('singleproj', {projects : project});
+        }
+      });
     }
 
     //Update Project

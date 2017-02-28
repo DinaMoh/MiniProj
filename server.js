@@ -5,9 +5,9 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('client-sessions');
 var DB_URI = "mongodb://localhost:27017/portfolio";
-
 var app = express();
-
+var path = require('path');
+var fs = require('fs');
 
 app.set('view engine', 'ejs');
 
