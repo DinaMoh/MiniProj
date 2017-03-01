@@ -7,6 +7,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <style media="screen">
         * {
             font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -23,11 +24,11 @@
             padding-left: 70px;
             border: 0;
             border-radius: 0 !important;
-            background: #2c3e50;
+            background: #14141f;
         }
 
         .navbar-default .navbar-brand {
-            text-transform: uppercase;
+            text-transform: capitalize;
             font-size: 2em;
             text-decoration: none;
             color: white;
@@ -97,17 +98,21 @@
         .form-control {
             width: 90%;
         }
+
+        .inv{
+          display: none;
+        }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-default">
-        <div class="col-xs-10 col-md-8">
+        <div class="col-xs-10 col-md-11">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/home"><%= username %> Portfolio</a>
+                <a class="navbar-brand"><%= username %> Portfolio</a>
             </div>
         </div>
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-1">
           <form method="GET" action="/logout">
             <input type="submit" class="btn btn-default" value="Log Out"/>
           </form>
@@ -116,8 +121,12 @@
     <div class="row">
         <div class="col-xs-4 col-md-8">
             <div class="row">
+              <div class="col-md-10">
+                <h4 id="msg"><%= message %></h4>
+                <button class="btn btn-default" id="n_port" onclick="create_port()">Create Portfolio</button>
+              </div>
                 <% for(var i=0; i<projects.length; i++){%>
-                    <div class="card col-xs-4">
+                    <div class="card col-xs-4 col-md-4">
                         <h4 class="card-title" name="<%=projects[i]._id%>"><a href="/viewSingleProj/<%=projects[i]._id%>"><%= projects[i].title %></a></h4>
                         <textarea class="card-description" disabled><%= projects[i].description %></textarea>
                         <a href="<%= projects[i].URL %>" class="btn btn-primary card-link">Visit Website</a>
@@ -127,6 +136,7 @@
         </div>
         <div class="col-xs-12 col-md-4">
             <div class="form-container">
+              <div class="inv" id="n_proj">
                 <h3 style="margin-bottom:40px;">Add New Project</h3>
                 <form class="form" method="POST" action="/project">
                     <div class="form-group">
@@ -143,8 +153,24 @@
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
+              </div>
             </div>
         </div>
     </div>
   </body>
+  <script>
+    $(function(){
+      if($('#msg').is(':empty'))
+      {
+        $("#n_port").css("display", "none");
+        $("#n_proj").css("display", "initial");
+      }
+    });
+
+    function create_port(){
+      // alert("Here");
+      $("#n_port").css("display", "none");
+      $("#n_proj").css("display", "initial");
+    }
+  </script>
 </html>

@@ -1,5 +1,5 @@
 let Project = require('../models/Project');
-let User = require('../models/User');
+var projs;
 
 let projectController = {
 
@@ -18,11 +18,13 @@ let projectController = {
             }
             else
             {
-              res.render('index', {projects : projects})
+              console.log(Object.keys(projects).length);
+              res.json(projects);
+              // res.render('index', {projects : projects})
               // res.render('index', {projects});
               // console.log('kdkdk');
             }
-        })
+        });
     },
 
     //Create Porject
@@ -70,17 +72,11 @@ let projectController = {
             res.send(err.message);
           }
           else {
-            // user.name = "Dina";
-            // var name = Dina;
-            res.render('userproj', {projects : projects, username : req.session.username});
-            // User.find({_id: uid}, function(err, users){
-            //   if(err){
-            //     res.send(err.message);
-            //   }
-            //   else {
-            //     res.render('userproj', {projects}, {users});
-            //   }
-            // });
+            var message = "";
+            if((Object.keys(projects).length) == 0){
+              var message = "You have no portfolio, yet? Create new portfolio to add projects.";
+            }
+            res.render('userproj', {projects : projects, username : req.session.username, message:message});
           }
         });
       }
@@ -113,18 +109,18 @@ let projectController = {
     },
 
     //User projects
-    getProjectsbyUser:function(req, res, next){
-      var userId = req.params._userId;
-      Project.find(userId, function(err, projects){
-        if(err){
-          res.send(err.message);
-        }
-        else {
-          // Not sure yet
-          res.json(projects);
-        }
-      });
-    },
+    // getProjectsbyUser:function(req, res, next){
+    //   var userId = req.params._userId;
+    //   Project.find(userId, function(err, projects){
+    //     if(err){
+    //       res.send(err.message);
+    //     }
+    //     else {
+    //       // Not sure yet
+    //       res.json(projects);
+    //     }
+    //   });
+    // },
 
     viewSingleProj:function(req, res, next){
       var pid = req.params.id;
@@ -133,10 +129,29 @@ let projectController = {
           res.send(err.message);
         }
         else {
-          res.render('singleproj', {projects : project});
+          res.render('singleproj', {projects : project, username: req.session.username});
         }
       });
-    }
+    },
+
+    getTenProjects:function(req, res, next){
+      var no = req.params.no;
+      Project.find({}, function(err, projects)
+      {
+        if(err){
+          res.send(err.message);
+        }
+        else {
+          var proj = Project.find({});
+          console.log("noo" + Object.keys(proj).length);
+          var pg = Math.ceil(((Object.keys(proj).length)/2)/10);
+          var ck = (pg * 10) - 10;
+          // pg = pg + 1;
+          console.log(pg);
+          res.render('index', {projects : projects, pg : pg, ck:ck});
+        }
+      }).skip(no).limit(10);
+    },
 
     //Update Project
     // updateProject:function(req, res, next){
@@ -169,4 +184,4 @@ let projectController = {
 
 }
 
-module.exports = projectController;
+var s = module.exports = projectController;

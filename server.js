@@ -8,7 +8,8 @@ var DB_URI = "mongodb://localhost:27017/portfolio";
 var app = express();
 var path = require('path');
 var fs = require('fs');
-
+var multer = require('multer');
+var upload = multer({dest: 'app/uploads/'});
 app.set('view engine', 'ejs');
 
 // configure app

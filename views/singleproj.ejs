@@ -23,11 +23,11 @@
             padding-left: 70px;
             border: 0;
             border-radius: 0 !important;
-            background: #2c3e50;
+            background: #14141f;
         }
 
         .navbar-default .navbar-brand {
-            text-transform: uppercase;
+            text-transform: capitalize;
             font-size: 2em;
             text-decoration: none;
             color: white;
@@ -49,7 +49,7 @@
             text-align: center;
             margin: 10px 3% 1% 3%;
             height: auto;
-            width: 100%;
+            /*width: 100%;*/
         }
 
         .card .card-title {
@@ -121,12 +121,12 @@
 
 <body>
     <nav class="navbar navbar-default">
-        <div class="col-xs-10 col-md-8">
+        <div class="col-xs-10 col-md-11">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/home"><%= projects.title%></a>
+                <a class="navbar-brand" href="/getUserProjects">Edit <%= username%>'s Projects</a>
             </div>
         </div>
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-1">
           <form method="" action="/logout">
             <input type="submit" class="btn btn-default" value="Log Out" action="/logout"/>
           </form>
@@ -154,5 +154,7 @@
       </div>
     </div>
 
-
+<script>
+  // alert("Dd");
+</script>
   </body>

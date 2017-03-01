@@ -6,14 +6,16 @@ var userController = require('./controllers/userController');
 
 // add routes
 // Project Routes
-router.get('/', projectController.getAllProjects);
-router.get('/getAllProjects/:show', projectController.getAllProjects);
+router.get('/', projectController.getTenProjects);
+router.get('/gnT/:no', projectController.getTenProjects);
+router.get('/getAllProjects', projectController.getAllProjects);
 router.get('/get/:id', projectController.findProject);
 router.get('/remove/:id', projectController.deleteProject);
 router.get('/getUserProjects', projectController.getUserProjects);
 router.post('/project', projectController.createProject);
 router.get('/removeAllProjects', projectController.deleteAllProjects);
 router.get('/viewSingleProj/:id', projectController.viewSingleProj);
+// router.get('/viewProjects', projectController.getTenProjects);
 // User routes
 // router.get('/', userController.home);
 router.get('/getAllUsers', userController.getAllUsers);

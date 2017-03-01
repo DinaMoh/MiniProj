@@ -36,7 +36,13 @@ let userController = {
       }
     });
   },
-
+  // postImg:function(req, res, next){
+  //   upload.single();
+  //   res.send(req.files);
+  // },
+  // router.post('/', upload.single(), function(req, res, next){
+  //   res.send(req.files);
+  // });
 
   //Get User by email and password
   loginUser:function(req, res){
