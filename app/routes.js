@@ -16,6 +16,8 @@ router.get('/getUserProjects', projectController.getUserProjects);
 router.post('/project', projectController.createProject);
 router.get('/removeAllProjects', projectController.deleteAllProjects);
 router.get('/viewSingleProj/:id', projectController.viewSingleProj);
+router.post('/updateProject', projectController.updateProj);
+router.get('/viewPort/:name', projectController.getPortProjects);
 
 router.get('/getAllUsers', userController.getAllUsers);
 router.post('/login', userController.loginUser);

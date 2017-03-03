@@ -1,5 +1,5 @@
 let Project = require('../models/Project');
-var projs;
+let Portfolio = require('../models/Portfolio');
 
 let projectController = {
 
@@ -61,7 +61,6 @@ let projectController = {
     },
 
     getUserProjects:function(req, res, next){
-
       var uid = req.session.uid;
       if(!(uid))
       {
@@ -81,8 +80,27 @@ let projectController = {
           }
         });
       }
-      // console.log("gUP : " + uid);
+    },
 
+    getPortProjects:function(req, res, next){
+      var portname = req.params.name;
+      // console.log("port" + portname);
+      Portfolio.findOne({header: portname}, function(err, portfolio){
+        if(err){
+          res.send(err.message);
+        }
+        else {
+          // console.log("PORT ID = " + portfolio.id);
+          Project.find({pid:portfolio.id}, function(err, projects){
+            console.log("IS IT?" + projects);
+            if((projects.length > 0))
+              var disp = "none";
+            else
+              var disp = "initial";
+            res.render('visitorPortView', {projects : projects, username : portname, disp:disp});
+          });
+        }
+      });
     },
 
     //Delete Project
@@ -161,33 +179,11 @@ let projectController = {
     },
 
     //Update Project
-    // updateProject:function(req, res, next){
-    //   var project = req.body;
-    //   var updProject = {};
-    //   var id = req.params.id;
-    //
-    //   if(project.title){
-    //     updProject.title = project.title;
-    //   }
-    //
-    //   if(project.URL){
-    //     updProject.URL = project.URL;
-    //   }
-    //   if(!updProject){
-    //     res.status(400);
-    //     res.json({"error":"Wrong Data"});
-    //   }
-    //   else {
-    //     Project.update(id, updProject, {}, function(err, project){
-    //       if(err){
-    //         res.send(err);
-    //       }
-    //       else {
-    //         res.json(project);
-    //       }
-    //     });
-    //   }
-    // }
+    updateProj:function(req, res){
+      Project.update({title:req.body.title, description:req.body.description, URL:req.body.URL, uid:req.session.uid, pid:req.session.pid}, function(err, project){
+        console.log("Yaaa");
+      });
+    }
 
 }
 

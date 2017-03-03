@@ -48,46 +48,19 @@
             border-radius: 5px;
             text-align: center;
             margin: 10px 3% 1% 3%;
-            height: auto;
-            /*width: 100%;*/
+            height: 190px;
+            width: calc(80% * (1/3));
         }
 
         .card .card-title {
-            /*color: #02695e;*/
+            color: #02695e;
             font-size: 2em;
             font-weight: bold;
             text-transform: capitalize;
-            width: 100%;
-            margin-bottom: 5%;
-            border: 2px solid white;
-            color: white;
-            background: transparent;
-            transition: background-color 0.5s ease;
-        }
-
-        .card .card-title:hover {
-            color: #18bc9c;
-            background: white;
-            transition: background-color 0.5s ease;
-        }
-
-        .card .card-description{
-          width: 100%;
-          height: 50%;
-          border: 2px solid white;
-          color: white;
-          background: transparent;
-          transition: background-color 0.5s ease;
-        }
-
-        .card .card-description:hover {
-            color: #18bc9c;
-            background: white;
-            transition: background-color 0.5s ease;
         }
 
         .card .card-link {
-            margin-top: 5%;
+            margin-top: 40px;
             font-size: 1.1em;
             font-weight: bold;
             width: 90%;
@@ -112,56 +85,31 @@
         .form-control {
             width: 90%;
         }
-
-        .projCard{
-          background: #18bc9c;
-        }
-
-        .mrg{
-          margin-top: 50%;
-        }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-default">
-        <div class="col-xs-10 col-md-11">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/getUserProjects">Edit <%= username%>'s Projects</a>
+                <a class="navbar-brand" href="/"><%= username%> PORTFOLIO</a>
             </div>
-        </div>
-        <div class="col-xs-12 col-md-1">
-          <form method="" action="/logout">
-            <input type="submit" class="btn btn-default" value="Log Out" action="/logout"/>
-          </form>
         </div>
     </nav>
-
     <div class="row">
-      <div class="col-md-offset-1 col-md-10 card">
-        <form class="form" method="POST" action="/updateProject">
-          <div class="row">
-            <!-- <input class="card-title"><%= projects.title %></input> -->
-            <div class="col-md-offset-1 col-md-10">
-              <div class="col-md-offset-1 col-md-10">
-                <input class="card-title" value="<%= projects.title %>" name="title"/>
+        <div class="col-xs-12 col-md-8">
+            <div class="row">
+              <div style="display:<%= disp%>">
+                <h4>No Projects in this Portfolio.</h4>
               </div>
-              <div class="col-md-offset-1 col-md-10">
-                <textarea class="card-description" name="description"><%= projects.description %></textarea>
-              </div>
-              <div class="col-md-offset-1 col-md-9">
-                <input class="card-link" value="<%= projects.URL %>" name="URL"/>
-              </div>
-              <div class="col-md-1">
-                <input class="btn btn-default mrg" type="Submit" value="Update"/>
-              </div>
+                <% for(var i=0; i<projects.length; i++){%>
+                    <div class="card col-xs-4">
+                        <h4 class="card-title"> <%= projects[i].title %></h4>
+                        <a href="<%= projects[i].URL %>" class="btn btn-primary card-link">Visit Website</a>
+                    </div>
+                <% } %>
             </div>
-          </div>
-        </form>
-      </div>
+        </div>
     </div>
 
-<script>
-  // alert("Dd");
-</script>
-  </body>
+</html>

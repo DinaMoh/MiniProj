@@ -101,7 +101,7 @@
   <nav class="navbar navbar-default">
       <div class="col-xs-6 col-md-6">
           <div class="navbar-header">
-              <a class="navbar-brand" href="/home">PortForYou</a>
+              <a class="navbar-brand" href="/">PortForYou</a>
           </div>
       </div>
       <div class="col-xs-6 col-md-6 ">
@@ -119,8 +119,8 @@
         <div class="row">
             <% for(var i=0; i<ports.length; i++){%>
                 <div class="card col-xs-4">
-                    <h4 class="card-title"> <%= ports[i].header %></h4>
-                    <img src="../uploads/j.jpg"/>
+                    <h4 class="card-title"><a href="/viewPort/<%= ports[i].header %>"><%= ports[i].header %></a></h4>
+                    <img src="<%=user.avatarPath %>"/>
                 </div>
             <% } %>
         </div>
