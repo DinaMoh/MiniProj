@@ -22,14 +22,14 @@ let userController = {
 
   // Register User
   createUser:function(req, res){
-    let user = new User(req.body);
-    console.log("dddd  " + req.file.path);
-    user.save({name:req.body.name, username:req.body.username, email:req.body.email, avatarPath:req.file.path}, function(err, user){
+    let user = new User({name:req.body.name, username:req.body.username, email:req.body.email, password:req.body.password, avatarPath:req.file.path});
+    user.save(function(err, user){
       if(err){
         res.send(err.message)
         console.log(err);
       }
       else {
+        console.log("Port id = " + user.id + " ..... Port Header = " + user.name ); 
         let port = new Portfolio({_id:user.id, header:user.name});
         port.save(function(err, portfolio){
           if(err){
