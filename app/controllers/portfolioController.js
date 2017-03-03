@@ -40,6 +40,17 @@ let portfolioController = {
     }).skip(no).limit(10);
   },
 
+  deleteAllPorts:function(req, res, next){
+    Portfolio.remove(function(err, ports){
+      if(err){
+        res.send(err.message);
+      }
+      else {
+        res.redirect('/');
+      }
+    });
+  },
+
   createPort:function(req, res){
     let port = new Portfolio({_id:req.session.uid, header: req.session.username});
     port.save(function(err, portfolio){

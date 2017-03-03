@@ -133,14 +133,14 @@
           <h5>Don't have an account, yet? Register here.</h5>
           <button class="btn btn-default" name="register" onclick="register()" id="reg_btn">Register</button>
         </div>
-        <form class="form inv" method="POST" action="/regUser" id="reg_form">
+        <form class="form inv" method="POST" action="/regUser" enctype="multipart/form-data" id="reg_form">
           <h3 style="margin-bottom:40px;">Register</h3>
           <!-- <input type="file" name="file"/> -->
           <input type="text" class="form-control" name="name" placeholder="Name"/>
           <input type="text" class="form-control" name="username" placeholder="Username"/>
           <input type="text" class="form-control" name="email" placeholder="Email"/>
           <input type="password" class="form-control" name="password" placeholder="Password"/>
-          <!-- <input type="file" name="userPhoto"/> -->
+          <input type="file" name="userPhoto"/>
           <input type="submit" class="btn btn-default" value="Submit"/>
         </form>
       </div>

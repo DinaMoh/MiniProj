@@ -23,8 +23,10 @@ router.get('/getAllUsers', userController.getAllUsers);
 router.post('/login', userController.loginUser);
 router.post('/regUser', userController.createUser);
 router.get('/logout', userController.logout);
+router.get('/removeAllUsers', userController.deleteAllUsers);
 
 router.get('/getUserPort', portfolioController.getUserPort);
 router.post('/createPortfolio', portfolioController.createPort);
+router.get('/removeAllPortfolios', portfolioController.deleteAllPorts);
 // export router
 module.exports = router;

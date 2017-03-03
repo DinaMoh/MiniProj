@@ -23,7 +23,8 @@ let userController = {
   // Register User
   createUser:function(req, res){
     let user = new User(req.body);
-    user.save(function(err, user){
+    console.log("dddd  " + req.file.path);
+    user.save({name:req.body.name, username:req.body.username, email:req.body.email, avatarPath:req.file.path}, function(err, user){
       if(err){
         res.send(err.message)
         console.log(err);
@@ -80,6 +81,17 @@ let userController = {
           }
         }
       });
+  },
+
+  deleteAllUsers:function(req, res, next){
+    User.remove(function(err, users){
+      if(err){
+        res.send(err.message);
+      }
+      else {
+        res.redirect('/');
+      }
+    });
   },
 
   logout:function(req, res){

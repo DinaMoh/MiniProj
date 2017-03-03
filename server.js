@@ -28,6 +28,7 @@ app.set('view engine', 'ejs');
 //     console.log(file.fieldname + ' uploaded to ' + file.path)
 //   }
 // }).single('userPhoto'));
+app.use(multer({ dest: './uploads/'}).single('userPhoto'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(__dirname+ '/public'));
 app.use(session({
