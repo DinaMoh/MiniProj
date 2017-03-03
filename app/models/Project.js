@@ -17,6 +17,10 @@ var projectSchema = mongoose.Schema({
     uid:{
       type:String,
       required:true
+    },
+    pid:{
+      type:String,
+      required:true
     }
 })
 

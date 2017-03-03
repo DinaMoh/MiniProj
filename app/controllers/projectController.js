@@ -30,6 +30,7 @@ let projectController = {
     //Create Porject
     createProject:function(req, res){
         req.body.uid = req.session.uid;
+        req.body.pid = req.session.pid;
         let project = new Project(req.body);
 
         project.save(function(err, project){
@@ -135,6 +136,12 @@ let projectController = {
     },
 
     getTenProjects:function(req, res, next){
+      if(req.session.created){
+        var message = req.session.created;
+      }
+      else {
+        var message = "";
+      }
       var no = req.params.no;
       Project.find({}, function(err, projects)
       {
@@ -148,7 +155,7 @@ let projectController = {
           var ck = (pg * 10) - 10;
           // pg = pg + 1;
           console.log(pg);
-          res.render('index', {projects : projects, pg : pg, ck:ck});
+          res.render('index', {projects : projects, pg : pg, ck:ck, message:message});
         }
       }).skip(no).limit(10);
     },

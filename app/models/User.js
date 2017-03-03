@@ -18,11 +18,11 @@ var userSchema = mongoose.Schema({
   password:{
     type:String,
     required:true
-  },
-  avatarPath:{
-    type:String,
-    required:true
   }
+  // avatarPath:{
+  //   type:String,
+  //   required:true
+  // }
 })
 
 var User = mongoose.model("user", userSchema);

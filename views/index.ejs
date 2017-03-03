@@ -129,6 +129,7 @@
       <div class="form-container">
           <!-- <button class="btn btn-default" id="user_sub" onclick="showForm">Register</button> -->
         <div id="reg_div">
+          <h3><%= message %></h3>
           <h5>Don't have an account, yet? Register here.</h5>
           <button class="btn btn-default" name="register" onclick="register()" id="reg_btn">Register</button>
         </div>
@@ -139,7 +140,7 @@
           <input type="text" class="form-control" name="username" placeholder="Username"/>
           <input type="text" class="form-control" name="email" placeholder="Email"/>
           <input type="password" class="form-control" name="password" placeholder="Password"/>
-          <input type="file" name="img"/>
+          <!-- <input type="file" name="userPhoto"/> -->
           <input type="submit" class="btn btn-default" value="Submit"/>
         </form>
       </div>
