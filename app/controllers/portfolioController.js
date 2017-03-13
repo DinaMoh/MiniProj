@@ -25,9 +25,10 @@ let portfolioController = {
       else{
         for(var i = 0; i<portfolios.length; i++){
           User.findOne({_id:portfolios[i].id}, function(err, user){
-            console.log("USER = " + user.avatarPath);
+          //  console.log("USER = " + user.avatarPath);
             // Project.count({_id:user.id}, function(err, count){
               // console.log(count);
+
               res.render('index',{ports:portfolios, message:message, user:user});
             // });
           });
